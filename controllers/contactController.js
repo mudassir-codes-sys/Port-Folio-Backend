@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 const sendMail = async (req, res) => {
   const { name, email, number, message } = req.body;
+
   try {
     const transporter = nodemailer.createTransport({
       service: "SendGrid",
