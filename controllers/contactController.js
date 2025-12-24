@@ -3,17 +3,14 @@ const sendMail = async (req, res) => {
   const { name, email, number, message } = req.body;
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "SendGrid",
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+        user: "apikey",
+        pass: process.env.SENDGRID_API_KEY,
       },
     });
     const mailOptions = {
-      from: {
-        name: name,
-        address: process.env.EMAIL,
-      },
+      from: process.env.EMAIL,
       to: process.env.EMAIL,
       replyTo: email,
       subject: `Message from ${name}`,
