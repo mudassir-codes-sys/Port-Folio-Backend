@@ -11,6 +11,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
+app.get("/test",(req ,res)=>{
+  res.send("woking")
+})
+
 app.use(cors());
 
 app.use(express.json());
