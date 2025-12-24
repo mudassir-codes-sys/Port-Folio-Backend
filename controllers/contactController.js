@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+
 const sendMail = async (req, res) => {
   const { name, email, number, message } = req.body;
 
@@ -10,15 +11,16 @@ const sendMail = async (req, res) => {
         pass: process.env.SENDGRID_API_KEY,
       },
     });
+
     const mailOptions = {
       from: process.env.EMAIL,
       to: process.env.EMAIL,
       replyTo: email,
       subject: `Message from ${name}`,
       text: `Sender email: ${email}
-      Name: ${name}
-      Number: ${number}
-      Message: ${message}`,
+Name: ${name}
+Number: ${number}
+Message: ${message}`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -26,6 +28,7 @@ const sendMail = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Message sent successfully" });
   } catch (error) {
+    console.log("SendMail error:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
