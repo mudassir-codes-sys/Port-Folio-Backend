@@ -53,7 +53,7 @@ app.post("/chat", async (req, res) => {
       model: "llama-3.3-70b-versatile",
       messages,
       temperature: 0.7,
-      max_tokens: 1024,
+      max_tokens: 512,
     });
 
     const reply = completion.choices[0]?.message?.content || "Sorry, I couldn't generate a response.";
